@@ -1,5 +1,12 @@
 
-    <?php wp_head(); ?> 
+  
+  
+  
+  
+  <?php get_header() ?>
+  
+  
+
 
     <h1>  <?php the_title(); ?>  </h1>
 
