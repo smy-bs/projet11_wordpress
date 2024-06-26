@@ -1,18 +1,24 @@
 
-<?php wp_head(); ?> 
+<?php get_header() ?>
 
-<h1>  <?php the_title(); ?>  </h1>
 
-<?php //the_content(); ?>
 
-<!---    the hero section    ----->
-<h2>PHOTOGRAPHE EVENT</h2>
+<?php //the_content(); ?> 
+
+
+<main id="primary" class="site-main">
+    <section class="photo__header">
+        <div class="photo__content">
+            <img class="photographe" src="<?php echo get_template_directory_uri() . '/assets/nathalie-11.jpeg'; ?> " alt="photograph__event">
+            <h1 class="photograph__event"> PHOTOGRAPH EVENT </h1>        
+        </div>
+    </section>
 
 <section class="filter">
 
-<?php
+    <?php
     $args= array (
-        'post_type' => 'photo', 
+        'post_type' => 'photos', 
         'posts_per_page' => 8, 
         'orderby' => 'date',
         'order' => 'DESC',
@@ -23,13 +29,37 @@
     if( $query ->have_posts() ) : 
         while( $query ->have_posts() ) : 
             $query ->the_post();
-            $image_url = get_the_post_thumbnail_url(); ?>
+            $image_url = get_the_post_thumbnail_url(); 
+                      ?>
 
             <div class="card">
-                <img class="post_img" src="<?php echo  $image_url ?>" alt="photo test"  data-imgId="<?php echo $post_id ?>" />
+               <a href="<?php echo $image_url?>">
+                 <img class="post_img" src="<?php echo  $image_url ?>" alt="photo test"  
+                 data-imgId="<?php echo $post_id ?>" /> 
+               
+                 <img
+                class="fullscreen"
+                src="./assets/maximize.svg"
+                alt="logo"
+                role="button"
+                aria-pressed="false"
+            />
+            <img
+                class="lightbox-eye"
+                alt="lightbox eye"
+                role="button"
+                aria-pressed="false"
+                src="./assets/eye.svg"
+            />
+        
 
                 <span class="title"> <?php  echo the_title() ?> </span>
-				<span class="categorie">categorie ici dynamique </span>
+                
+				<span class="categorie"><?php  echo the_category() ?>
+                <span class="post_link">
+                <a href="<?php the_permalink();?>"> link por le post</a></span>
+        
+            </span>
             </div>
 
 <?php    
@@ -42,8 +72,10 @@ endwhile;
    
     wp_reset_postdata(); ?>
 
+
+
 </section>
     
-   
+</main>
 
 <?php get_footer(); ?> 

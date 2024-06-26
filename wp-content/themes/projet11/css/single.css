@@ -1,0 +1,84 @@
+@import url('header.css');,
+@import url('footer.css');
+
+
+.post-info {
+    flex: 1;
+    position:relative;
+  }
+
+.post-texte {
+    padding: 20px;
+    width:100%;
+    position:relative;
+    top:215px;
+    gap:20px;
+
+    
+}
+.single_title{
+    text-transform:uppercase;
+    font-style: var(--font-style-italic);
+    font-size: var( --font-size-h2);
+    font-weight: var( --font-weight-normal);
+    line-height: 58px;
+}
+
+.text_group{
+    text-transform:uppercase;
+    font-size: var(--font-size-description);
+    line-height: 20.73px;
+}
+.post-image {
+    flex: 1;
+    display: flex;
+    justify-content:flex-end;
+    align-items: center;
+    }
+
+.attachment-post-thumbnail{
+    width:563px;
+    height:843px;
+    object-fit: contain;
+   
+}
+
+.contact_line{
+    position:relative;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    gap:10px;
+    margin:100px 144px 0px 144px;
+    border-top: 1px solid var(--color-noir);
+    border-bottom: 1px solid var(--color-noir);
+    padding-top:10px;
+    padding-bottom: 10px;
+    }
+    
+.single_btn{
+    margin-left:-450px;
+}
+
+.thumbnail_img{
+    width: 81px;
+height: 71px;
+}
+
+.img_propose{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+   margin:100px 144px 0px 144px;
+}
+.img_group {
+    display: flex;
+    gap: 10px; 
+}
+.post_photos{
+    
+      width:564px;
+    height:495px;
+    margin-bottom: 80px;
+    
+}

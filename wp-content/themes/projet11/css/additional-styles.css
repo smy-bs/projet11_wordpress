@@ -1,0 +1,41 @@
+@import url('../style.css')
+
+p{
+    list-style: none;
+    padding: 0;
+  }
+  a {
+    text-decoration: none;
+  }
+  ul,li{
+    list-style: none;
+  }
+  
+  button {
+    background-color: var(--color-gris-medium);
+    outline: 0;
+    border: 0;
+    width: 263px;
+    height: 50px;
+    color: var(--color-noir);
+  }
+  
+  button:hover {
+    outline: 1px solid var(--color-noir);
+    color: var(--color-blanc);
+    background-color: var(--color-noir);
+  }
+  
+  /* Common */
+  .container {
+    max-width: 1440px;
+      }
+  
+   .single_post{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin:100px 144px 0px 144px;
+          }
+ 
+  
