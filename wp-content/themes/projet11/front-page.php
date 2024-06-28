@@ -14,9 +14,37 @@
         </div>
     </section>
 
+  <section class="formulaire">
+    <div class="categories">
+        <select class="option" name="category" id="category-select">
+        <option value="">categories</option>    
+        <option value="reception">Réception</option>
+        <option value="television">Télévision</option>
+        <option value="concert">Concert</option>
+        <option value="mariage">Mariage</option>
+         </select>
+    </div>
+  
+    <div class="formats">
+        <select class="option" name="format" id="format-select">
+        <option value="">format</option>
+        <option value="paysage">Paysage</option>
+        <option value="portrait">Portrait</option>
+        </select>
+    </div>
+
+    <div class="trierpar">
+        <select class="option" name="trier" id="trier-select">
+        <option value="">Trier-Par</option>
+        <option value="category">category</option>
+        <option value="format">format</option>
+        </select>
+    </div>
+  </section>  
+
 <section class="filter">
 
-    <?php
+<?php
     $args= array (
         'post_type' => 'photos', 
         'posts_per_page' => 8, 
@@ -53,13 +81,15 @@
             />
         
 
-                <span class="title"> <?php  echo the_title() ?> </span>
-                
-				<span class="categorie"><?php  echo the_category() ?>
+               
+            <span class="title"> <?php  echo the_title() ?> </span>
+			<span class="categorie"><?php  echo the_category() ?></span>
+              
+
                 <span class="post_link">
                 <a href="<?php the_permalink();?>"> link por le post</a></span>
         
-            </span>
+            
             </div>
 
 <?php    

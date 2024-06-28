@@ -12,3 +12,13 @@
     text-align: center;
     margin:auto;
 }
+
+/* responsive */
+@media (max-width: 768px) {
+
+    .site-footer{
+        display:flex;
+        flex-direction: column;
+       margin-top: 10px;
+    }
+}

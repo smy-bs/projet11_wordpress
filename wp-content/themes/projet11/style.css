@@ -54,6 +54,7 @@ Text Domain: my-custom-theme
 body {
   margin: 0;
   padding:0;
+  width:100%;
 }
 
 h1,
@@ -76,7 +77,9 @@ h3 {
 
 
 /* FRONT PAGE STYLE CSS*/
-
+.photo__content{
+	height: 1100px;
+}
 .photographe {
   width: 100%;
   object-fit: cover;
@@ -102,39 +105,101 @@ h3 {
   text-stroke:1px var(--color-blanc);
 }
 
+
+/* FORMULAIRE SECTION */
+.formulaire{
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin:auto;
+	max-width: 1100px;
+}
+select.option{
+	width:120px;
+	height:30px;
+	border:1px solid var(--color-gris-fonce);
+	border-radius: 10px;
+	text-align: center;
+}
+
+
 /* filter section */
 
 .filter {
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(2, 564px);
+	gap: 20px; 
 	justify-content: center;
-	gap: 20px;
-}
+	align-items: center; 
+	padding: 20px;
+	
+  }
 
-.filter .card {
-	border: 1px;
+.card {
 	position: relative;
+	top: 0px;
+	width: 100%;
+    /* max-width: 564px; */
+    height: 495px;
+	border: 1px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Card shadow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.post_img {
+    width: 100%;
+    /* height: 70%; */
+    object-fit: cover; /* Adjust image to fit the card */
 }
 
 .filter .card::after {
 	content: "";
 	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
+	top: -10px;
+	/* left: 20; */
+	right: 20;
 	bottom: 0;
+	height:100%;
+	width:100%;
 	background: #00000099;
 	opacity: 0;
 	transition: opacity 200ms ease-in-out;
+	
 }
 
 .filter .card img {
-	width: 380px;
-	height: 285px;
+	width: 564px;
+	height: 495px;
 	object-fit: cover;
-	max-width: 100%;
-	vertical-align: middle;
+	} 
+
+.post_img {
+width: 100%;
+height: 70%;
+object-fit: cover; 
 }
+
+.title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 10px; 
+}
+
+.categorie {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 5px;
+}
+
+.post_link {
+	margin-top: -51px;
+    font-size: 0.9em;
+    color: #32373c;
+}
+
 
 .filter .card .fullscreen {
 	position: absolute;
@@ -186,12 +251,15 @@ h3 {
 }
 
 .filter .card .title {
-	left: 17px;
+	left: 50px;
+	top: 435px;
 }
 
-.filter .card .categorie {
-	right: 17px;
-}
+ul.post-categories{
+	position: relative;
+    left: 187px;
+    top: -61px;
+}  
 
 /*  lightbox */
 
@@ -290,4 +358,97 @@ p.lightbox__ref {
 
 p.lightbox__cat {
 	color: white;
+}
+
+
+/* responsive */
+@media (max-width: 768px) {
+	.photo__content {
+		height: 450px;
+	}
+	.formulaire{
+		display:flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap:20px;
+	}
+
+	.filter {
+		display: grid;
+		grid-template-columns: repeat(1, 564px);
+		gap: 20px; 
+		justify-content: center;
+		align-items: center; 
+		padding: 20px;
+		
+	  }
+	  .card {
+		position: relative;
+		top: 0px;
+		width: 90%;
+		height: 495px;
+		margin:10px;
+		padding: 20px;
+	}
+	.post_img {
+		width: 90%;
+		margin:10px;
+		/* height: 70%; */
+		object-fit: contain; /* Adjust image to fit the card */
+	}
+	
+	.filter .card::after {
+		content: "";
+		position: absolute;
+		top: -10px;
+		/* left: 20; */
+		right: 20;
+		bottom: 0;
+		height:100%;
+		width:100%;
+		background: #00000099;
+		opacity: 0;
+		transition: opacity 200ms ease-in-out;
+		
+	}
+	
+	.filter .card img {
+		width: 500px;
+		height: 400px;
+				} 
+	
+	.post_img {
+	width: 100%;
+	height: 70%;
+		}
+	
+	.title {
+		font-size: 1.2em;
+		font-weight: bold;
+		margin-top: 10px; 
+	}
+	
+	.categorie {
+		font-size: 0.9em;
+		color: #666;
+		margin-top: 5px;
+	}
+	
+	.post_link {
+		margin-top: -51px;
+		font-size: 0.9em;
+		color: #32373c;
+	}
+	.filter .card .title {
+		left: 116px;
+		top: 388px;
+	}
+	
+	ul.post-categories{
+		position: relative;
+		left: 129px;
+		top: -71px;
+	}  
+	
 }
