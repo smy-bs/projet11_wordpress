@@ -43,9 +43,29 @@
                 'fallback_cb' => '__return_false'
             ) );
             ?>
+             <!-- <button class="contact_btn">Contact</button> -->
             
 
         </nav>
+ <!-- Ajout d'une popup pour annoncer la participation au salon -->
+
+                <?php
+// On récupère les champs ACF nécessaires
+$titre=get_field('titre', 161);
+$description=get_field('description', 161);
+$lieu=get_field('lieu', 161);
+$date=get_field('date', 161);
+$lien=get_field('lien_google_maps', 161);
+?>
+
+<div class="popup-overlay">
+	<div class="popup-salon">
+		<?php
+		// On insère le formulaire de demandes de renseignements
+		echo do_shortcode('[contact-form-7 id="964745f" title="Contact form 1"]');
+		?>
+	</div>
+</div>
 
         
     </header>

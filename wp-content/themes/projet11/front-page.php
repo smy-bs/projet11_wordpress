@@ -16,29 +16,86 @@
 
   <section class="formulaire">
     <div class="categories">
+        <?php 
+          /// categories
+
+        $categories = get_categories( array(
+            'orderby' => 'name',
+            'order'   => 'ASC'
+        ));
+        ?>
+        <div role="button" class="select-btn">
+            Catégories
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.58909 12.2559C5.26366 12.5814 4.73602 12.5814 4.41058 12.2559C4.08514 11.9305 4.08514 11.4028 4.41058 11.0774L9.41058 6.07741C9.73602 5.75197 10.2637 5.75197 10.5891 6.07741L15.5891 11.0774C15.9145 11.4028 15.9145 11.9305 15.5891 12.2559C15.2637 12.5814 14.736 12.5814 14.4106 12.2559L9.99984 7.84518L5.58909 12.2559Z" fill="#313144"/>
+            </svg>
+        <div>
+        <ul>
+                <?php
+
+                foreach( $categories as $category ):
+                    $category_link = sprintf( 
+                        esc_html( $category->name )
+                    ); ?>
+                    
+                    <li> <?php echo $category_link; ?> </li>
+                <?php endforeach; ?>
+        </ul>
+        <!--- 
         <select class="option" name="category" id="category-select">
-        <option value="">categories</option>    
-        <option value="reception">Réception</option>
-        <option value="television">Télévision</option>
-        <option value="concert">Concert</option>
-        <option value="mariage">Mariage</option>
+            <option class="option_font" value="">categories</option>    
+            <option class="option_font" value="reception">Réception</option>
+            <option class="option_font" value="television">Télévision</option>
+            <option class="option_font" value="concert">Concert</option>
+            <option class="option_font" value="mariage">Mariage</option>
          </select>
+         --->
     </div>
   
     <div class="formats">
+        <div role="button" class="select-btn">
+                Formats
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.58909 12.2559C5.26366 12.5814 4.73602 12.5814 4.41058 12.2559C4.08514 11.9305 4.08514 11.4028 4.41058 11.0774L9.41058 6.07741C9.73602 5.75197 10.2637 5.75197 10.5891 6.07741L15.5891 11.0774C15.9145 11.4028 15.9145 11.9305 15.5891 12.2559C15.2637 12.5814 14.736 12.5814 14.4106 12.2559L9.99984 7.84518L5.58909 12.2559Z" fill="#313144"/>
+                </svg>
+        <div>
+        <ul>
+                <?php
+
+                $formats = get_terms( 'format', array(
+                    'orderby'    => 'count',
+                    'hide_empty' => 0,
+                ) );
+
+                foreach( $formats as $format ):
+                    $format_link = sprintf( 
+                        esc_html( $format->name )
+                    ); ?>
+                    
+                    <li> <?php echo $format_link; ?> </li>
+                <?php endforeach; ?>
+        </ul>
+
+        <!--- 
         <select class="option" name="format" id="format-select">
-        <option value="">format</option>
-        <option value="paysage">Paysage</option>
-        <option value="portrait">Portrait</option>
+            <option class="option_font" value="">format</option>
+            <option class="option_font" value="paysage">Paysage</option>
+            <option class="option_font" value="portrait">Portrait</option>
         </select>
+        --->
     </div>
 
     <div class="trierpar">
-        <select class="option" name="trier" id="trier-select">
-        <option value="">Trier-Par</option>
-        <option value="category">category</option>
-        <option value="format">format</option>
-        </select>
+        <div role="button" class="select-btn">
+            TRIER PAR
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.58909 12.2559C5.26366 12.5814 4.73602 12.5814 4.41058 12.2559C4.08514 11.9305 4.08514 11.4028 4.41058 11.0774L9.41058 6.07741C9.73602 5.75197 10.2637 5.75197 10.5891 6.07741L15.5891 11.0774C15.9145 11.4028 15.9145 11.9305 15.5891 12.2559C15.2637 12.5814 14.736 12.5814 14.4106 12.2559L9.99984 7.84518L5.58909 12.2559Z" fill="#313144"/>
+            </svg>
+        <div>
+            <ul>
+                <li>Nouveou</li>
+                <li>Ancienne</li>
+            </ul>
     </div>
   </section>  
 

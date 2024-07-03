@@ -1,11 +1,11 @@
+
 .line{
     border-top:1px solid var(--color-noir);
     width:100%;
 }
-
 .site-footer{
     display:flex;
-        height:40px;
+    height:40px;
 }
 #menu-footer-menu{
     justify-content: center;
@@ -15,10 +15,26 @@
 
 /* responsive */
 @media (max-width: 768px) {
-
-    .site-footer{
+    .line{
+        border-top:1px solid var(--color-noir);
+        margin:0;
+    }
+    .site-footer .primary-menu a {
+        position:relative;
         display:flex;
         flex-direction: column;
-       margin-top: 10px;
+        color:var(--color-noir);
+        position:relative;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        top:0px;
+        left:10px;
+        font-size: var(--font-size-p);
+                      
     }
-}
+    #menu-footer-menu{
+        display:block;
+       }
+   } 

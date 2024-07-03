@@ -53,6 +53,15 @@ function script_menu() {
         array()
     );
 }
+
+// add contact_btn 
+function contact_btn( $items, $args ) {
+	//var_dump($items , $args);
+	$items .= '<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-94"><span role="button" class="contact_btn" >CONTACT</span></li>';
+	return $items;
+}
+add_filter( 'wp_nav_menu_items', 'contact_btn', 10, 2 );
+
 // add script
 function script_lightbox() {
     wp_enqueue_script(
@@ -77,12 +86,17 @@ function single_post_ajax(){
     wp_reset_postdata();
 }
 
-
-
-    
+function my_plugin_enqueue_scripts() { 
+	// Enqueue jQuerywp_enqueue_script('jquery'); 
+	wp_enqueue_script('jquery');
+	// Enqueue your custom script (optional)
+	wp_enqueue_script( 'script-Js', get_template_directory_uri() . '/js/script.js', array(), '1.0.0', true );
+ } 
+ 
     
 // add_action('wp_enqueue_scripts', 'cookinfamily_scripts');
 
+add_action('wp_enqueue_scripts', 'my_plugin_enqueue_scripts');
 add_action( 'wp_enqueue_scripts', 'script_menu' );
 add_action('wp_enqueue_scripts', 'script_filter');
 add_action('wp_enqueue_scripts', 'script_lightbox');
