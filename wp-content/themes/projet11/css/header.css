@@ -267,5 +267,58 @@ input.wpcf7-form-control.wpcf7-submit.has-spinner:hover{
     -webkit-text-stroke: 1px var(--color-blanc);
     text-stroke: 1px var(--color-blanc);
   }
+/* popup style */
+
+.popup-salon{
+  background:white;
+  max-width:286px;
+  height:590px;
+  padding:30px;
+  margin: auto;
+  position:relative;
+  border: 5px solid black;
+  overflow: hidden;
+ }
+
+.popup-header{
+  position:relative;
+  top:-21px;
+  left:-190px;
+  height:55px;
+  }
+.popup-body{
+ width:263px;
+ position: relative;
+ top:-30px;
+ left:4px;
+ }
+
+ input.wpcf7-form-control.wpcf7-text.wpcf7-validates-as-required{
+  width:190px;
+  height: 40px;
+  border:1px solid var(--color-gris-border);
+  border-radius: 8px;
 }
+
+textarea.wpcf7-form-control.wpcf7-textarea{
+  width:190px;
+  height: 149px;
+  }
+
+input.wpcf7-form-control.wpcf7-submit.has-spinner{
+  background-color: var(--color-gris-medium);
+  outline: 0;
+  border: 0;
+  width: 190px;
+  height: 50px;
+  color: var(--color-noir);
+}
+/* input.wpcf7-form-control.wpcf7-submit.has-spinner:hover{
+  outline: 1px solid var(--color-noir);
+  color: var(--color-blanc);
+  background-color: var(--color-noir);
+} */
+}
+
+
 

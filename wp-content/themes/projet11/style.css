@@ -50,7 +50,7 @@ Text Domain: my-custom-theme
 
 * {
   box-sizing: border-box;
-  /* outline: 1px solid pink; */
+  outline: 1px solid pink;
 }
 
 body {
