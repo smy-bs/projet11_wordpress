@@ -15,7 +15,7 @@
     </section>
 
   <section class="formulaire">
-        <article class="accordion-categories">
+        <article>
         <div class="categories">
                 <?php 
                 /// categories
@@ -55,7 +55,7 @@
                 </select>
                 --->
           
-    <article class="accordion-formats">
+    <article>
     <div class="formats">
         <div role="button" class="select-btn">
                 Formats
@@ -90,7 +90,7 @@
     </div></article>
 
     
-    <article class="accordion-trierpar">
+    <article>
     <div class="trierpar">
         <div role="button" class="select-btn">
             TRIER PAR
