@@ -15,7 +15,8 @@
     </section>
 
   <section class="formulaire">
-            <div class="categories">
+        <article class="accordion-categories">
+        <div class="categories">
                 <?php 
                 /// categories
 
@@ -26,11 +27,11 @@
                 ?> 
                 <div role="button" class="select-btn">
                     Catégories
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <svg class="svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M5.58909 12.2559C5.26366 12.5814 4.73602 12.5814 4.41058 12.2559C4.08514 11.9305 4.08514 11.4028 4.41058 11.0774L9.41058 6.07741C9.73602 5.75197 10.2637 5.75197 10.5891 6.07741L15.5891 11.0774C15.9145 11.4028 15.9145 11.9305 15.5891 12.2559C15.2637 12.5814 14.736 12.5814 14.4106 12.2559L9.99984 7.84518L5.58909 12.2559Z" fill="#313144"/>
                 </svg>
-                <div>
-                <ul>
+            </div>
+                <ul class="ul-category">
                         <?php
 
                         foreach( $categories as $category ):
@@ -41,6 +42,9 @@
                             <li> <?php echo $category_link; ?> </li>
                         <?php endforeach; ?>
                 </ul>
+                </div>
+        </article>   
+            
                 <!--- 
                 <select class="option" name="category" id="category-select">
                     <option class="option_font" value="">categories</option>    
@@ -50,8 +54,8 @@
                     <option class="option_font" value="mariage">Mariage</option>
                 </select>
                 --->
-            </div>
-  
+          
+    <article class="accordion-formats">
     <div class="formats">
         <div role="button" class="select-btn">
                 Formats
@@ -59,7 +63,7 @@
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M5.58909 12.2559C5.26366 12.5814 4.73602 12.5814 4.41058 12.2559C4.08514 11.9305 4.08514 11.4028 4.41058 11.0774L9.41058 6.07741C9.73602 5.75197 10.2637 5.75197 10.5891 6.07741L15.5891 11.0774C15.9145 11.4028 15.9145 11.9305 15.5891 12.2559C15.2637 12.5814 14.736 12.5814 14.4106 12.2559L9.99984 7.84518L5.58909 12.2559Z" fill="#313144"/>
                 </svg>
                         </div>
-        <ul>
+        <ul class="ul-formats">
                 <?php
 
                 $formats = get_terms( 'format', array(
@@ -83,8 +87,10 @@
             <option class="option_font" value="portrait">Portrait</option>
         </select>
         --->
-    </div>
+    </div></article>
 
+    
+    <article class="accordion-trierpar">
     <div class="trierpar">
         <div role="button" class="select-btn">
             TRIER PAR
@@ -92,12 +98,12 @@
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M5.58909 12.2559C5.26366 12.5814 4.73602 12.5814 4.41058 12.2559C4.08514 11.9305 4.08514 11.4028 4.41058 11.0774L9.41058 6.07741C9.73602 5.75197 10.2637 5.75197 10.5891 6.07741L15.5891 11.0774C15.9145 11.4028 15.9145 11.9305 15.5891 12.2559C15.2637 12.5814 14.736 12.5814 14.4106 12.2559L9.99984 7.84518L5.58909 12.2559Z" fill="#313144"/>
             </svg>
                 </div>
-            <ul>
+            <ul class="ul-trier">
                 <li>Nouveou</li>
                 <li>Ancienne</li>
             </ul>
     </div>
-
+    </article>
   </section>  
 
 <section class="filter">
