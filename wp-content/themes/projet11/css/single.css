@@ -27,6 +27,13 @@
   line-height: 20.73px;
   font-weight: var(--font-weight-typo);
 }
+
+.single_format a {
+  pointer-events: none; /* 링크 클릭 비활성화 */
+  text-decoration: none; /* 텍스트 데코레이션 제거 */
+  color: inherit; /* 부모 요소의 텍스트 색상 상속 */
+}
+
 .post-image {
   flex: 1;
   display: flex;
@@ -103,6 +110,7 @@
 }
 
 .titre_imgpro{
+  margin-left: -933px;
   margin-bottom: 50px;
   font-family: var(--font-primary);
   font-size: var(--font-size-h3);
@@ -207,7 +215,8 @@
   }
   .titre_imgpro {
     position: relative;
-    top: -190px;
+    top: 0px;
+    margin-left: 0px;
     width: 229px;
     font-size: 18px;
     font-weight: var(--font-weight-normal);

@@ -1,113 +1,100 @@
-// // toutes les elements 'fullscreen'
-// const fullscreen_array = document.querySelectorAll(".fullscreen")
 
-// // const lightbox = document.querySelector(".lightbox")
-// // const lightboxClose = document.querySelector(".lightbox__close")
-// // const imgThumbnail = document.getElementById("imgThumbnail")
 
-// const lightboxNext = document.querySelector(".lightbox__next")
-// const lightboxPrev = document.querySelector(".lightbox__prev")
+document.addEventListener("DOMContentLoaded", () => {
+    // 모든 'fullscreen' 요소 선택
+    const fullscreenArray = document.querySelectorAll(".fullscreen");
 
-// const lightboxRef = document.querySelector(".lightbox__ref")
-// const lightboxCat = document.querySelector(".lightbox__cat")
+    // 라이트박스 요소 선택
+    const lightbox = document.querySelector(".lightbox");
+    const lightboxClose = document.querySelector(".lightbox__close");
+    const imgThumbnail = document.getElementById("imgThumbnail");
+    const lightboxNext = document.querySelector(".lightbox__next");
+    const lightboxPrev = document.querySelector(".lightbox__prev");
+    const lightboxRef = document.querySelector(".lightbox__ref");
+    const lightboxCat = document.querySelector(".lightbox__cat");
 
-// const lightboxBlackBg = document.querySelector(".lightbox__box")
+    if (!lightbox || !lightboxClose || !imgThumbnail || !lightboxNext || !lightboxPrev || !lightboxRef || !lightboxCat) {
+        console.error("Lightbox elements not found");
+        return;
+    }
 
-// // console.log(fullscreen_array)
+    let showLightBox = false;
+    let arrayIndex = null;
 
-// // inicialize la variable global afficher lightbox
-// let showLightBox = false
-// let arrayIndex = null
+    // 각 'fullscreen' 요소에 클릭 이벤트 리스너 추가
+    fullscreenArray.forEach((fullBtn, i) => {
+        fullBtn.addEventListener("click", () => {
+            arrayIndex = i;
+            updateDom(arrayIndex);
+            checkLightBox();
+        });
+    });
 
-// fullscreen_array.forEach((full_btn, i) => {
-// 	full_btn.addEventListener("click", () => {
-// 		checkLighBox()
-// 		// console.log(imgThumbnail.src)
-// 		arrayIndex = i
-// 		updateDom(arrayIndex)
-// 	})
-// })
+    // 라이트박스 닫기 이벤트 리스너 추가
+    lightboxClose.addEventListener("click", () => {
+        lightbox.style.display = 'none';
+        showLightBox = false;
+    });
 
-// /*  EVENT LISTENERS   */
+    // 다음 이미지로 이동
+    lightboxNext.addEventListener("click", () => {
+        addImageIndex();
+    });
 
-// //rachouter an event listener
-// lightboxClose.addEventListener("click", () => {
-// 	checkLighBox()
-// })
+    // 이전 이미지로 이동
+    lightboxPrev.addEventListener("click", () => {
+        removeImageIndex();
+    });
 
-// // rachouter en evenment sur la fleche souivent
-// lightboxNext.addEventListener("click", () => {
-// 	addImageIndex()
-// })
+    // 키보드 이벤트 리스너 추가
+    window.addEventListener("keydown", (e) => {
+        // ESC 키를 눌렀을 때
+        if (showLightBox && e.code === "Escape") {
+            lightbox.style.display = "none";
+            showLightBox = false;
+            return;
+        }
+        // 오른쪽 화살표 키를 눌렀을 때
+        if (showLightBox && e.code === "ArrowRight") {
+            return addImageIndex();
+        }
+        // 왼쪽 화살표 키를 눌렀을 때
+        if (showLightBox && e.code === "ArrowLeft") {
+            return removeImageIndex();
+        }
+    });
 
-// lightboxPrev.addEventListener("click", () => {
-// 	removeImageIndex()
-// })
+    // 라이트박스 DOM 업데이트 함수
 
-// // When the user clicks anywhere outside of the modal, close it
-// window.addEventListener("click", (e) => {
-// 	if (
-// 		e.target == lightboxBlackBg ||
-// 		e.target.className === "lightbox__container" ||
-// 		e.target.className === "lightbox"
-// 	) {
-// 		lightbox.style.display = "none"
-// 		console.log("afuera !!!")
-// 	}
-// })
+    function updateDom(index) {
+        const imgElement = fullscreenArray[index].previousElementSibling;
+        imgThumbnail.src = imgElement.src;
+       lightboxRef.textContent = imgElement.getAttribute('data-ref');
+        lightboxCat.textContent = imgElement.getAttribute('data-cat');
+      	
+    }
 
-// // keyboard navigation
-// window.addEventListener("keydown", (e) => {
-// 	// if the "esc" key is pressed
-// 	if (showLightBox && e.code === "Escape") {
-// 		lightbox.style.display = "none"
-// 		showLightBox = false
-// 		return
-// 	}
-// 	if (showLightBox && e.code === "ArrowRight") {
-// 		return addImageIndex()
-// 	}
-// 	if (showLightBox && e.code === "ArrowLeft") {
-// 		return removeImageIndex()
-// 	}
-// })
+    // 라이트박스 표시 함수
+    function checkLightBox() {
+        if (!showLightBox) {
+            lightbox.style.display = 'flex';
+            showLightBox = true;
+        }
+    }
 
-// /*    fuctions     */
-// // open or closes the lightbox
-// function checkLighBox() {
-// 	if (showLightBox) {
-// 		lightbox.style.display = "none"
-// 		showLightBox = false
-// 	} else {
-// 		lightbox.style.display = "flex"
-// 		showLightBox = true
-// 	}
-// }
+    // 다음 이미지로 이동 함수
+    function addImageIndex() {
+        if (arrayIndex < fullscreenArray.length - 1) {
+            arrayIndex++;
+            updateDom(arrayIndex);
+        }
+    }
 
-// // updates the index value according to the selected pic
-// function addImageIndex() {
-// 	if (arrayIndex === photosArray.length - 1) {
-// 		arrayIndex = 0
-// 	} else {
-// 		arrayIndex = arrayIndex + 1
-// 	}
-// 	updateDom(arrayIndex)
-// }
-
-// // updates the index value according to the selected pic
-// function removeImageIndex() {
-// 	if (arrayIndex == 0) {
-// 		arrayIndex = photosArray.length - 1
-// 	} else {
-// 		arrayIndex = arrayIndex - 1
-// 	}
-// 	// console.log(arrayIndex)
-// 	updateDom(arrayIndex)
-// }
-
-// // updates the DOM based on the changes of its index array
-// function updateDom(passedIndex) {
-// 	imgThumbnail.src = photosArray[passedIndex].imageUrl
-// 	lightboxRef.textContent = photosArray[passedIndex].reference
-// 	lightboxCat.textContent = photosArray[passedIndex].category
-// }
+    // 이전 이미지로 이동 함수
+    function removeImageIndex() {
+        if (arrayIndex > 0) {
+            arrayIndex--;
+            updateDom(arrayIndex);
+        }
+    }
+});

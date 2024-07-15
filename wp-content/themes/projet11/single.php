@@ -40,7 +40,7 @@ $category = null;
                                     }
 
                                     ?></p>
-                    <p> FORMAT : <?php echo the_terms(get_the_ID(), 'format', false) ?></p>
+                    <p class="single_format"> FORMAT : <?php echo the_terms(get_the_ID(), 'format', false) ?></p>
                     <p> TYPE : <?php echo get_post_meta(get_the_ID(), 'type', true); ?></p>
                     <p> ANNÉE : <?php the_date('Y'); ?></p>
                 </div>
