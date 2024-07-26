@@ -13,6 +13,45 @@ header {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
+.bouche-pas{
+  position: relative;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  height: 80px;
+}
+
+.bouche-pa .site-branding{
+  position: absolute;
+  top: 0;
+  left: 0;
+
+}
+
+.bouche-pas .menu-toggle-fix .line_menu{
+  transform: none;
+  opacity: 1;
+}
+
+/* .bouche-pas .menu-toggle-fix{
+  position: absolute;
+  right: 0;
+} */
+
+/* .line_menu:first-child{
+  transform: rotate(45deg) translateX(8px) translateY(8px);
+}
+
+.line_menu:nth-child(2){
+  opacity: 0;
+}
+
+.line_menu:nth-child(3){
+  transform: rotate(-45deg) translateX(6px) translateY(-4px);
+} */
+
 /* logo */
 .site-branding {
   display: flex;
@@ -103,25 +142,29 @@ header {
   position:relative;
   border: 5px solid black;
   overflow: hidden;
- }
- label{
+}
+
+label{
   font-size: var(--font-size-typo);
   font-family: var( --font-secondary);
   font-weight: var(--font-weight-typo);
- }
+}
+
 .popup-header{
   position:relative;
   top:-16px;
   left:-174px;
   height:106px;
   }
+
 .popup-body{
- width:263px;
- position: relative;
- top:20px;
- left:130px;
- margin-bottom: 30px;
+width:263px;
+position: relative;
+top:20px;
+left:130px;
+margin-bottom: 30px;
 }
+
 input.wpcf7-form-control.wpcf7-text.wpcf7-validates-as-required{
   width:263px;
   height: 40px;
@@ -168,12 +211,23 @@ input.wpcf7-form-control.wpcf7-submit.has-spinner:hover{
   }
 }
 
+@keyframes slideOut{
+  0%{
+    transform: translateX(0%);
+  }
+  100%{
+    transform: translateX(100%);
+  }
+}
 .fadeInAnim{
   animation: fadeIn 320ms ease-in-out forwards;
 }
 
 .slideInAnim {
   animation: slideIn 320ms ease-in-out forwards;
+}
+.slideOut {
+  animation: slideOut 320ms ease-in-out forwards;
 }
 
 
@@ -184,7 +238,7 @@ input.wpcf7-form-control.wpcf7-submit.has-spinner:hover{
     margin-left: -160px;
   }
 
-.menu-toggle {
+.menu-toggle, .menu-toggle-fix {
   display:block;
   position:relative;
   background-color: transparent;
@@ -195,6 +249,11 @@ input.wpcf7-form-control.wpcf7-submit.has-spinner:hover{
   height: 30px;
   cursor: pointer; 
 }
+
+.menu-toggle-fix {
+  left: 67px !important;
+}
+
 .primary-menu {
   display:none;
   flex-direction: column;
@@ -216,6 +275,7 @@ input.wpcf7-form-control.wpcf7-submit.has-spinner:hover{
   color:var(--color-blanc);
   font-family: var(--font-primary);
   position:relative;
+  top:-84px;
   left: 10px;
   line-height: 65.16px;
   display:flex;
@@ -227,7 +287,7 @@ input.wpcf7-form-control.wpcf7-submit.has-spinner:hover{
 .menu-item-btn{
   background-color: transparent;
 }
-.line_menu {
+.line_menu, .line_menu-fix {
   display: block;
   width: 30px;
   height: 3px;
@@ -242,9 +302,9 @@ input.wpcf7-form-control.wpcf7-submit.has-spinner:hover{
     width: 100%;
     object-fit: cover;
     height: auto; /* 이미지 비율 유지 */
-    max-height: 100vh; /* 화면 높이를 벗어나지 않도록 설정 */
+    max-height: 253px; /* 화면 높이를 벗어나지 않도록 설정 */
     position: relative;
-    top: 50px;
+    top: 0px;
     z-index: 1;
   }
 
@@ -255,8 +315,8 @@ input.wpcf7-form-control.wpcf7-submit.has-spinner:hover{
     font-style: var(--font-style-italic);
     line-height: 40.86px;
     position: absolute;
-    top: 22%;
-    right:13%;
+    top: 15%;
+    right:18%;
     z-index: 2;
     display:flex;
     text-align: center;
@@ -265,7 +325,6 @@ input.wpcf7-form-control.wpcf7-submit.has-spinner:hover{
     gap: 10px;
     color: transparent;
     -webkit-text-stroke: 1px var(--color-blanc);
-    text-stroke: 1px var(--color-blanc);
   }
 /* popup style */
 
@@ -278,6 +337,7 @@ input.wpcf7-form-control.wpcf7-submit.has-spinner:hover{
   position:relative;
   border: 5px solid black;
   overflow: hidden;
+  top:45px;
  }
 
 .popup-header{

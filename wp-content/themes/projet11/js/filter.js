@@ -38,8 +38,29 @@ addEventListener("DOMContentLoaded", () => {
 	let format = null
 	let category = null
 	let date = null
+
+	function closeSelectedLi() {
+		li_list.forEach((item) => {
+			item.parentNode.style.visibility = "invisible"
+			item.parentNode.style.height = "0"
+			item.parentNode.previousElementSibling.style.border =
+				"1.3px solid var(--color-gris-border)"
+			item.parentNode.previousElementSibling.style.borderRadius = "8px"
+
+			item.parentNode.parentNode.querySelector(".svg").style.opacity = 0
+			item.parentNode.parentNode.querySelectorAll("svg")[1].style.opacity = 1
+		})
+	}
+
+
+	// fermer les éléments sélectionnés
+	window.addEventListener("click", () => {
+		closeSelectedLi()
+	})
+
 	li_list.forEach((element) => {
-		element.addEventListener("click", () => {
+		element.addEventListener("click", (e) => {
+			e.stopPropagation()
 			console.log(element.innerText, element.getAttribute("data-field"))
 			const url = js_filter_js.ajax_url
 			const formData = new FormData()
@@ -69,15 +90,7 @@ addEventListener("DOMContentLoaded", () => {
 			})
 
 			// revenir à l'état précédent du CSS
-			element.parentNode.style.visibility = "invisible"
-			element.parentNode.style.height = "0"
-			element.parentNode.previousElementSibling.style.border =
-				"1.3px solid var(--color-gris-border)"
-			element.parentNode.previousElementSibling.style.borderRadius = "8px"
-			console.log(element.parentNode.parentNode)
-			element.parentNode.parentNode.querySelector(".svg").style.opacity = 0
-			element.parentNode.parentNode.querySelectorAll("svg")[1].style.opacity = 1
-
+			closeSelectedLi()
 
 			if (format) formData.append("format", format)
 			if (category) formData.append("category", category)
@@ -90,11 +103,22 @@ addEventListener("DOMContentLoaded", () => {
 				.then((response) => response.json())
 				.then((data) => {
 					const container = document.getElementById("photo-container")
-					container.innerHTML = "" // efface tout
+					container.innerHTML = "" // efface tout 
 					console.log(data)
 					if (data.success) {
 						console.log(data.data)
 						container.insertAdjacentHTML("beforeend", data.data.content)
+						fullscreenArray = document.querySelectorAll(".fullscreen");
+					//console.log(fullscreenArray);
+					// 각 'fullscreen' 요소에 클릭 이벤트 리스너 추가
+					fullscreenArray.forEach((fullBtn, i) => {
+					
+						fullBtn.addEventListener("click", () => {
+							arrayIndex = i;
+							updateDom(arrayIndex);
+							checkLightBox(lightbox);
+						});
+					});
 					} else {
 						container.innerHTML = "Error with the data ..."
 					}
@@ -105,10 +129,10 @@ addEventListener("DOMContentLoaded", () => {
 
 //LoaddMore
 
-addEventListener("DOMContentLoaded", () => {
+addEventListener("DOMContentLoaded", function(){
 	const loadMoreButton = document.getElementById("load-more")
 	let currentPage = 1
-
+// console.log('loadMoreButton');
 	loadMoreButton.addEventListener("click", () => {
 		currentPage++
 		const url = js_filter_js.ajax_url
@@ -127,13 +151,25 @@ addEventListener("DOMContentLoaded", () => {
 				return response.json()
 			})
 			.then((data) => {
-				console.log(data)
+				// console.log(data)
 				if (data.success) {
 					const container = document.getElementById("photo-container")
 					container.insertAdjacentHTML("beforeend", data.data.content)
 					if (!data.data.has_more) {
-						loadMoreButton.style.display = "none"
+						loadMoreButton.style.display = "block"
 					}
+					fullscreenArray = document.querySelectorAll(".fullscreen");
+					//console.log(fullscreenArray);
+					// 각 'fullscreen' 요소에 클릭 이벤트 리스너 추가
+					fullscreenArray.forEach((fullBtn, i) => {
+					
+						fullBtn.addEventListener("click", () => {
+							arrayIndex = i;
+							updateDom(arrayIndex);
+							checkLightBox(lightbox);
+						});
+					});
+
 				} else {
 					console.error("Error:", data.data)
 				}

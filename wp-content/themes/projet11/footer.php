@@ -11,6 +11,7 @@
       
 
 	</footer><!-- #colophon -->
+    <?php  get_template_part('/templates/lightbox', 'content')  ?>
 </div><!-- #page -->
 
 <?php wp_footer(); ?>

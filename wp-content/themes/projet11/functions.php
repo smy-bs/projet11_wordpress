@@ -6,12 +6,10 @@ function projet11_supports()
 }
 
 function projet11_enqueue_styles()
-{ //함수는 테마의 스타일 시트를 등록하고 로드합니다.
-    // Enqueue the main stylesheet
+{     // Enqueue the main stylesheet
     wp_enqueue_style('projet11-main', get_stylesheet_uri()); //// Load the main stylesheet
     // Enqueue additional styles
     wp_enqueue_style('additional-styles', get_template_directory_uri() . '/css/additional-styles.css');
-
 
     // Enqueue specific styles for header, footer, single, and page
     if (is_front_page()) {
@@ -62,9 +60,13 @@ function script_menu()
 // add contact_btn 
 function contact_btn($items, $args)
 {
+// verifier l'endroit du menu
+    if ( $args->theme_location == 'primary-menu') {//ajouter contact_btn seulement ici
+        $items .= '<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-94"><span role="button" class="contact_btn" >CONTACT</span></li>';
+                
+        }
     //var_dump($items , $args);
-    $items .= '<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-94"><span role="button" class="contact_btn" >CONTACT</span></li>';
-    return $items;
+   return $items;
 }
 add_filter('wp_nav_menu_items', 'contact_btn', 10, 2);
 
@@ -89,23 +91,39 @@ function get_random_photo()
 }
 
 // add script
-function script_lightbox()
+// function script_lightbox()
+// {
+//     wp_enqueue_script(
+//         'js_lightbox',
+//         get_template_directory_uri() . './js/lightbox.js',
+//         array(), 
+//         null, 
+//         true
+//     );
+// }
+function script_filter()
 {
+
+    // Enqueue jQuerywp_enqueue_script('jquery'); 
+   // wp_enqueue_script('jquery');
     wp_enqueue_script(
         'js_lightbox',
         get_template_directory_uri() . './js/lightbox.js',
-        array()
+        array(),
+        null,
+        true
     );
-}
-function script_filter()
-{
+    /* charger uniquement en première page front-page   */
+    if ( is_front_page() ){
     wp_enqueue_script(
         'js_filter',
         get_template_directory_uri() . './js/filter.js',
-        array()
+        array('js_lightbox'),
+        null,
+        true
     );
 
-
+    }
     /* AJOUTER AJAX ADMIN   */
     wp_localize_script('js_filter', 'js_filter_js', array('ajax_url' => admin_url('admin-ajax.php')));
 }
@@ -134,17 +152,15 @@ function load_more_posts_ajax()
             $category_list = implode(', ', $category_names);
             $reference = get_post_meta(get_the_ID(), 'reference', true);
             $post_id = get_the_ID();
-?>
-            <div class="card">
-                <img class="post_img" src="<?php echo $image_url; ?>" alt="<?php the_title_attribute(); ?>" data-ref="<?php echo $reference; ?>" data-cat="<?php echo esc_attr($category_list); ?>" />
-                <img class="fullscreen" src="<?php echo get_template_directory_uri(); ?>/assets/maximize.svg" alt="fullscreen logo" role="button" aria-pressed="false" />
-                <a href="<?php the_permalink(); ?>">
-                    <img class="lightbox-eye" alt="lightbox eye" role="button" aria-pressed="false" src="<?php echo get_template_directory_uri(); ?>/assets/eye.svg" />
-                    <span class="title"><?php echo $reference; ?></span>
-                    <span class="categorie"><?php echo $category_list; ?></span>
-                </a>
-            </div>
-        <?php
+
+          /*  card template avec donnes $args  */
+            $args = array(
+                'image_url' => $image_url,
+                'reference' => $reference,
+                'category' => $category_list
+            );
+            get_template_part("/templates/card", "template", $args);
+            
         }
         $content = ob_get_clean();
         wp_reset_postdata();
@@ -198,57 +214,22 @@ function filter_post_ajax()
         while ($query->have_posts()) {
             $query->the_post();
             $image_url = get_the_post_thumbnail_url();
-            $categories = get_the_category_list(', ');
+            $categories = get_the_category();
+            $category_names = array_map(function ($cat) {
+                return $cat->name;
+            }, $categories);
+            $category_list = implode(', ', $category_names);
             $reference = get_post_meta(get_the_ID(), 'reference', true);
             $post_id = get_the_ID();
-        ?>
 
+          /*  card template avec donnes $args  */
+          $args = array(
+            'image_url' => $image_url,
+            'reference' => $reference,
+            'category' => $category_list
+        );
+        get_template_part("/templates/card", "template", $args);
 
-            <!-- <div class="card">
-                <a href="<?php //echo $image_url; 
-                            ?>">
-                    <img class="post_img" 
-                    src="<?php //echo $image_url; 
-                            ?>" 
-                    alt="<?php //the_title_attribute(); 
-                            ?>" 
-                    data-imgId="<?php //echo $post_id; 
-                                ?>" />
-                </a>
-                <div class="overlay">
-                    <a href="<?php //the_permalink(); 
-                                ?>" 
-                    class="right-text">Reference: <?php //echo $reference; 
-                                                    ?></a>
-                    <a href="<?php //the_permalink(); 
-                                ?>" class="left-text">Catégories: 
-                        <?php //echo $categories; 
-                        ?></a>
-                    <div class="center-icons">
-                        <img class="fullscreen" src="<?php //echo get_template_directory_uri(); 
-                                                        ?>/assets/maximize.svg" alt="fullscreen logo" role="button" aria-pressed="false" />
-                        <img class="lightbox-eye" src="<?php //echo get_template_directory_uri(); 
-                                                        ?>/assets/eye.svg" alt="lightbox eye" role="button" aria-pressed="false" />
-                    </div>
-                </div>
-            </div> -->
-
-
-            <div class="card">
-                <img class="post_img" src="<?php echo $image_url; ?>" alt="<?php the_title_attribute(); ?>" data-ref="<?php echo $reference; ?>" data-cat="<?php echo $categories; ?>" />
-
-                <img class="fullscreen" src="<?php echo get_template_directory_uri(); ?>/assets/maximize.svg" alt="fullscreen logo" role="button" aria-pressed="false" />
-
-                <a href="<?php the_permalink(); ?>">
-                    <img class="lightbox-eye" alt="lightbox eye" role="button" aria-pressed="false" src="<?php echo get_template_directory_uri(); ?>/assets/eye.svg" />
-
-
-                    <span class="title"><?php echo $reference; ?></span></a>
-                <span class="categorie"><?php echo $categories; ?></span></a>
-
-            </div>
-
-<?php
         }
         $content = ob_get_clean();
         wp_reset_postdata();
@@ -270,20 +251,25 @@ function filter_post_ajax()
 
 function my_plugin_enqueue_scripts()
 {
-    // Enqueue jQuerywp_enqueue_script('jquery'); 
-    wp_enqueue_script('jquery');
+
     // Enqueue your custom script (optional)
-    wp_enqueue_script('script-Js', get_template_directory_uri() . '/js/script.js', array(), '1.0.0', true);
+    wp_enqueue_script(
+        'script-Js',
+        get_template_directory_uri() . '/js/script.js',
+        array(),
+        null,
+        true
+    );
 }
 
 
 
 // add_action('wp_enqueue_scripts', 'projet11_scripts');
-
+// add_action('wp_enqueue_scripts', 'script_lightbox');
 add_action('wp_enqueue_scripts', 'my_plugin_enqueue_scripts');
 add_action('wp_enqueue_scripts', 'script_menu');
 add_action('wp_enqueue_scripts', 'script_filter');
-add_action('wp_enqueue_scripts', 'script_lightbox');
+
 add_action('after_setup_theme', 'projet11_theme_setup');
 add_action('wp_enqueue_scripts', 'projet11_enqueue_styles');
 add_action('after_setup_theme', 'projet11_supports');

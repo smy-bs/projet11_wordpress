@@ -1,6 +1,9 @@
 @import url("header.css");
 @import url("/footer.css");
 
+#reference {
+  visibility: hidden;
+}
 .post-info {
   flex: 1;
   position: relative;
@@ -9,7 +12,8 @@
   padding: 20px;
   width: 100%;
   position: relative;
-  top: 215px;
+  top: 198px;
+  border-bottom: 1px solid #000;
   gap: 20px;
 }
 
@@ -34,13 +38,6 @@
   color: inherit; /* 부모 요소의 텍스트 색상 상속 */
 }
 
-.post-image {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
 .attachment-post-thumbnail {
   width: 563px;
   height: 843px;
@@ -53,11 +50,13 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  margin: 100px 144px 0px 144px;
-  border-top: 1px solid var(--color-noir);
+  margin-left: 145px;
+  margin-right: 145px;
+  max-width: 1298px;
+  border-top: 0px;
   border-bottom: 1px solid var(--color-noir);
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 22px;
+  padding-bottom: 22px;
 }
 
 .single_btn {
@@ -70,46 +69,58 @@
   height: 71px;
   object-fit: cover;
 }
-.attachment-medium{
+.attachment-medium {
   width: 100%;
   height: 71px;
-
+  object-fit: cover;
 }
 .thumbnail {
-  margin-bottom: 10px; /* 썸네일과 화살표 사이의 간격 */
-
+  /* margin-bottom: 10px;  */
+  position: relative;
+  top: -18px;
+}
+.thumbnail img {
+  opacity: 0;
+  transition: all 250ms ease-in-out;
 }
 
+.attachment-medium {
+  position: absolute;
+  width: 100%;
+}
 .arrows {
   display: flex;
   justify-content: space-between;
+  margin-top: 60px;
 }
 
 .prev_arrow,
 .next_arrow {
   display: inline-block;
-  width: 30px; /* 적절한 크기로 조정 */
+  width: 30px;
   height: 30px;
-  text-decoration: none; /* 링크 밑줄 제거 */
+  text-decoration: none;
   color: black; /* 텍스트 색상 (next 링크) */
 }
 
 .prev_arrow img {
   width: 100%; /* 이미지가 링크 크기에 맞게 조정 */
   height: auto;
+  opacity: 0;
+  transition: all 250ms ease-in-out;
 }
 
 .next_arrow {
   display: flex;
-  align-items: center; /* 세로 가운데 정렬 */
+  align-items: center;
   justify-content: center;
   width: 30px;
   height: 30px;
-  background-color: #f0f0f0; /* 적절한 배경색 */
+  /* background-color: #f0f0f0;  */
   border-radius: 50%; /* 원형으로 만들기 위해 */
 }
 
-.titre_imgpro{
+.titre_imgpro {
   margin-left: -933px;
   margin-bottom: 50px;
   font-family: var(--font-primary);
@@ -123,27 +134,146 @@
   flex-direction: column;
   align-items: center;
   margin-top: 50px;
-  
-
+  padding-bottom: 90px;
 }
 .img_group {
   display: flex;
-  gap: 10px;
-  margin-bottom: 50px;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1148px;
 }
 .post_photos {
-    width: 100%;
-    height: 100%;
-    margin-left: 0px;
-    object-fit: contain;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 100%;
+  margin-left: 0px;
+  object-fit: contain;
+  justify-content: center;
+  align-items: center;
 }
-.post_photo{
-    width: 564px;
-    height: 495px;
-    object-fit: cover;
+.post_photo {
+  width: 564px;
+  height: 495px;
+  object-fit: cover;
 }
+
+.card .lightbox-eye {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 46px;
+  height: 31.204px;
+  cursor: pointer;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+.card {
+  position: relative;
+  top: 0px;
+  width: 564px;
+  height: 100%;
+  border: 1px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Card shadow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.img_group .card::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 495px;
+  width: 564px;
+  background: #00000099;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+.img_group .card .fullscreen {
+  position: absolute;
+  top: 10px;
+  right: 17px;
+  width: 35px;
+  height: 35px;
+  z-index: 10;
+  cursor: pointer;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+  background: var(--color-noir);
+  padding: 8px;
+  border-radius: 50%;
+}
+
+.img_group .card:hover::after {
+  opacity: 1;
+}
+
+.post_img {
+  width: 564px;
+  height: 495px;
+  object-fit: cover;
+}
+
+.card .title {
+  position: relative;
+  left: -149px;
+  top: -53px;
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  color: white;
+  z-index: 10;
+  opacity: 0;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  transition: opacity 200ms ease-in-out;
+}
+
+a .categorie {
+  position: relative;
+  z-index: 10;
+  right: -153px;
+  top: -53px;
+  font-family: var(--font-primary);
+  color: white;
+  font-weight: 400;
+  opacity: 0;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  transition: opacity 200ms ease-in-out;
+}
+
+.card:hover .fullscreen,
+.card:hover .lightbox-eye,
+.card:hover::after,
+.card:hover .title,
+.card:hover .categorie {
+  opacity: 1;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 496px;
+  width: 564px;
+  background: #00000099;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
 /* Responsive */
 
 @media (max-width: 768px) {
@@ -160,12 +290,19 @@
 
   .post-texte {
     top: 10px;
+    border-bottom: 0px;
   }
+
   .text_group {
     position: relative;
     top: -24px;
     order: 2;
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-description);
+    line-height: 20.73px;
   }
+
   .attachment-post-thumbnail {
     width: 265px;
     height: 397px;
@@ -183,7 +320,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
+    gap: 0px;
     margin: 100px auto;
     border-top: 1px solid var(--color-noir);
     border-bottom: 1px solid var(--color-noir);
@@ -194,8 +331,17 @@
     width: 100%;
   }
 
+  .contact_line p {
+    font-family: var(--font-secondary);
+    font-weight: var(--font-weight-light);
+    font-size: var(--font-size-description);
+    color: var(--color-noir);
+    line-height: 21px;
+    margin-left: -40px;
+  }
+
   .single_btn {
-    margin-right: -128px;
+    margin-right: -146px;
   }
 
   .thumbnail_img {
@@ -203,6 +349,19 @@
     /* width: 81px;
     height: 71px; */
   }
+  .titre_imgpro {
+    position: relative;
+    top: -48px;
+    margin-left: 0px;
+    width: 229px;
+    font-size: 18px;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h3);
+    text-transform: uppercase;
+    font-weight: var(--font-weight-normal);
+    line-height: 26px;
+  }
+
   .img_propose {
     display: flex;
     flex-direction: column;
@@ -213,21 +372,14 @@
     margin-left: 0;
     margin-right: 0;
   }
-  .titre_imgpro {
-    position: relative;
-    top: 0px;
-    margin-left: 0px;
-    width: 229px;
-    font-size: 18px;
-    font-weight: var(--font-weight-normal);
-    text-transform: uppercase;
-    line-height: 26px;
-  }
-
   .img_group {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 317.66px;
+    justify-content: center;
+    align-items: center;
+    margin-top: -74px;
   }
   .post_photos {
     width: 100%;
@@ -242,13 +394,104 @@
     height: 278px;
     object-fit: cover;
   }
+
+  /* lightbox */
+  .card {
+    position: relative;
+    top: 0px;
+    width: 317px;
+    height: 278px;
+    object-fit: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .img_group .card::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background: #00000099;
+    transition: opacity 200ms ease-in-out;
+  }
+
+  .post_link {
+    margin-top: -81px;
+    font-size: 0.9em;
+    color: #32373c;
+  }
+
+  .lightbox__container img {
+    width: 317px;
+    height: auto;
+    object-fit: cover;
+  }
+  .card .title {
+    left: -30px;
+    top: -136px;
+    font-size: 12px;
+  }
+  a .categorie {
+    right: -29px;
+    top: -136px;
+  }
+
+  ul.post-categories {
+    position: relative;
+    left: 29px;
+    top: -71px;
+  }
+
+  .lightbox__info {
+    gap: 170px;
+    justify-content: center;
+  }
+  .img_group .card::after {
+    width: 100%;
+    height: 100%;
+  }
+
+  .lightbox__container img {
+    width: 300px;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .lightbox__next {
+    left: 295px;
+  }
+
+  .lightbox__prev {
+    left: 17px;
+  }
 }
 
-
-/* @media (min-width: 1441px) {
+@media (min-width: 1441px) {
+  .single_post {
+    margin: auto;
+  }
   .img_propose {
+    position: relative;
+    margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-} */
+  .contact_line {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: auto;
+    max-width: 1298px;
+    border-top: 0px;
+    border-bottom: 1px solid var(--color-noir);
+    padding-top: 22px;
+    padding-bottom: 22px;
+  }
+}

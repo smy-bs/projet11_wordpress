@@ -116,17 +116,17 @@
                 $category_list = implode(', ', $category_names);
                 $reference = get_post_meta(get_the_ID(), 'reference', true);
                 $post_id = get_the_ID();
+
+                //  passer les arguments comme données pour la carte $args
+                $args = array(
+                    'image_url' => $image_url,
+                    'reference' => $reference,
+                    'category' => $category_list
+                );
+                get_template_part("/templates/card", "template", $args);
+
         ?>
-                <div class="card">
-                    <img class="post_img" src="<?php echo $image_url; ?>" alt="<?php the_title_attribute(); ?>" data-ref="<?php echo $reference; ?>" data-cat="<?php echo esc_attr($category_list); ?>" />
-                    <img class="fullscreen" src="<?php echo get_template_directory_uri(); ?>/assets/maximize.svg" alt="fullscreen logo" role="button" aria-pressed="false" />
-                    <a href="<?php the_permalink(); ?>">
-                        <img class="lightbox-eye" alt="lightbox eye" role="button" aria-pressed="false" src="<?php echo get_template_directory_uri(); ?>/assets/eye.svg" />
-                        <span class="title"><?php echo $reference; ?></span>
-                        <span class="categorie"><?php echo $category_list; ?></span>
-                    </a>
-                </div>
-        <?php
+            <?php
             endwhile;
         else :
             _e('Sorry, no posts were found.', 'textdomain');
@@ -134,30 +134,11 @@
 
         wp_reset_postdata();
         ?>
-        <!-- 라이트박스 HTML 구조 -->
-        <div class="lightbox">
-            <div class="lightbox__box">
-                <button class="lightbox__close">Fermer</button>
-                <button class="lightbox__next">
-                    Suivant
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/arrow-right.svg" alt="next arrow" />
-                </button>
-                <button class="lightbox__prev">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/arrow-left.svg" alt="next arrow" />
-                    Précédent
-                </button>
-                <div class="lightbox__container">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/image-icon.png" alt="image thumbnail" id="imgThumbnail" />
-                    <div class="lightbox__info">
-                        <p class="lightbox__ref">light-ref</p>
-                        <p class="lightbox__cat">light-cat</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <button id="load-more">Load More</button>
-    </section>
+        
+        </section>
+        <button id="load-more">Charger plus</button>
+    
+    
 
 </main>
 

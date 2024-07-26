@@ -26,10 +26,11 @@ $category = null;
                     <?php
                     $post = get_post();
                     $categories = get_the_category($post->ID);
-
+                    $reference = get_post_meta(get_the_ID(), 'reference', true);
                     ?>
 
-                    <p> RÉFERENCE : <?php echo get_post_meta(get_the_ID(), 'reference', true); ?></p>
+                    <p> RÉFERENCE :<?php echo $reference; ?></p>
+                    <input type="hidden" name="reference" id="reference" aria-hidden="true" value="<?php echo $reference; ?>" readonly>
                     <p> CATÉGORIE : <?php
                                     if (!empty($categories)) {
                                         foreach ($categories as $category) {
@@ -52,7 +53,6 @@ $category = null;
                 ?>
             </div>
         </section>
-
         
         <section class="contact_line">
            <p>Cette photo vous intéresse ?</p>
@@ -60,15 +60,15 @@ $category = null;
             <div class="thumbnail_img">
             <div class="thumbnail">
         <?php echo get_the_post_thumbnail(get_previous_post(),'medium'); ?>
-        <?php //echo get_the_post_thumbnail(get_next_post(),'medium'); ?>
+        <?php echo get_the_post_thumbnail(get_next_post(),'medium'); ?>
     </div>
 
     <div class="arrows">
         <a href="<?php echo get_permalink(get_previous_post()) ?>" class="previous_arrow">
-            <img class="prev_arrow" src="<?php echo get_template_directory_uri() . '/assets/Lind6.png'; ?>" alt="previous_arrow">
+            <img class="prev_arrow" src="<?php echo get_template_directory_uri() . '/assets/prev-single.svg';?>" alt="previous_arrow">
         </a>
         <a href="<?php echo get_permalink(get_next_post()) ?>" class="next_arrow">
-        <img class="prev_arrow" src="<?php echo get_template_directory_uri() . '/assets/Lind7.png'; ?>" alt="next_arrow">
+        <img class="next_arrow" src="<?php echo get_template_directory_uri() . '/assets/next-single.svg'; ?>" alt="next_arrow">
         </a>
     </div>
             </div>
@@ -93,21 +93,27 @@ $category = null;
             
             $query = new WP_Query($args);
             ?>
-            <p class="titre_imgpro">Vous aimerez aussi</p>
+            <h2 class="titre_imgpro">Vous aimerez aussi</h2>
             <div class="img_group">
                 <?php  if( $query ->have_posts() ) :
                     while($query->have_posts()): 
                         $query ->the_post();
                         $image_url = get_the_post_thumbnail_url(); 
-                        ?>
-                    <div class="post_photos">
-                        <a href="<?php the_permalink(); ?>">
-                            <img class="post_photo" 
-                            src="<?php echo  $image_url ?>" alt="photo test"  
-                            data-imgId="<?php echo $post_id ?>" /> 
-                        </a>
-                    </div>
-                <?php endwhile; 
+                        $categories = get_the_category();
+                        $category_names = array_map(function ($cat) {
+                            return $cat->name;
+                        }, $categories);
+                        $category_list = implode(', ', $category_names);
+                        $reference = get_post_meta(get_the_ID(), 'reference', true);
+                        /*  card template avec donnes $args  */
+                    $args = array(
+                        'image_url' => $image_url,
+                        'reference' => $reference,
+                        'category' => $category_list
+                    );
+                    get_template_part("/templates/card", "template", $args);
+                    
+                endwhile; 
                 endif;
                 wp_reset_postdata(); 
                 

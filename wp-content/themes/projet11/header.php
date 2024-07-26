@@ -15,7 +15,27 @@
 </head>
 
 <body <?php body_class(); ?>>
-    <header>
+
+<div class="bouche-pas">
+    <div class="site-branding">
+                <?php
+                if (function_exists('the_custom_logo') && has_custom_logo()) {
+                    the_custom_logo();
+                } else {
+                ?>
+                    <a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a>
+                <?php
+                }
+                ?>
+            </div>
+            <div class="menu-toggle-fix">
+                <span class="line_menu-fix"></span>
+                <span class="line_menu-fix"></span>
+                <span class="line_menu-fix"></span>
+            </div>
+</div>
+
+    <header class="menu_slider">
 
         <div class="site-branding">
             <?php
